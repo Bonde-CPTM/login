@@ -25,6 +25,10 @@ public class LoginEntity {
     private UUID idLogin;
 
     @NotNull
+    @Column(name = "nome")
+    private String nome;
+
+    @NotNull
     @Column(name = "email")
     private String email;
 

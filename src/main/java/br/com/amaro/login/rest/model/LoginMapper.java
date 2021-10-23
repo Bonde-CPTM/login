@@ -6,6 +6,7 @@ public class LoginMapper {
     public static Login entitytoModel(LoginEntity entity){
         return Login.builder()
                 .idLogin(entity.getIdLogin())
+                .nome(entity.getNome())
                 .email(entity.getEmail())
                 .password(entity.getSenha())
                 .token(entity.getToken())
@@ -14,6 +15,7 @@ public class LoginMapper {
     public static LoginEntity modelToEntity(Login model){
         return LoginEntity.builder()
                 .idLogin(model.getIdLogin())
+                .nome(model.getNome())
                 .email(model.getEmail())
                 .senha(model.getPassword())
                 .token(model.getToken())

@@ -11,6 +11,7 @@ import java.util.UUID;
 @Builder
 public class Login {
     private UUID idLogin;
+    private String nome;
     private String email;
     private String password;
     private String token;
