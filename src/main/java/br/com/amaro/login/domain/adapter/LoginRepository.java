@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface LoginRepository extends JpaRepository<LoginEntity, String> {
+public interface LoginRepository extends JpaRepository<LoginEntity, UUID> {
     LoginEntity findByEmailAndSenha(String email, String senha);
     LoginEntity findByIdLogin(UUID idLogin);
     boolean existsByEmail(String email);

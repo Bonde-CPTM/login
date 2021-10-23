@@ -24,6 +24,7 @@ public class LoginService implements LoginPort {
         if(loginRepository.existsByEmail(login.getEmail())){
             throw new CreateLoginException();
         }
+        login.setToken(UUID.randomUUID().toString());
         return LoginMapper.entitytoModel(loginRepository.save(LoginMapper.modelToEntity(login)));
     }
 
