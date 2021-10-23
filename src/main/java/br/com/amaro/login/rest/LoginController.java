@@ -121,6 +121,14 @@ public class LoginController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/sessao")
+    public ResponseEntity<?> getSession(@RequestBody Login login){
+        return loginPort.getSession(login)?
+                ResponseEntity.ok().body(login):
+                ResponseEntity.status(402).body("Sessão inválida!");
+    }
+
     public boolean checkLogin(Login login){
         return login.getEmail().isEmpty() || login.getPassword().isEmpty();
     }

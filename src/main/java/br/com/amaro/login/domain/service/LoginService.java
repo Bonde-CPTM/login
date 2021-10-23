@@ -62,4 +62,9 @@ public class LoginService implements LoginPort {
         }
     }
 
+    @Override
+    public boolean getSession(Login login) {
+        return loginRepository.existsByIdLoginAndToken(login.getIdLogin(),login.getToken());
+    }
+
 }

@@ -17,4 +17,6 @@ public interface LoginPort {
     boolean deleteLogin(Login login);
 
     Login createSession(Login login) throws CreateSessionException;
+
+    boolean getSession(Login login);
 }
