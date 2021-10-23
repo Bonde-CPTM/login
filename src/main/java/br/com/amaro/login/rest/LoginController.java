@@ -33,8 +33,8 @@ public class LoginController {
                     .content(loginPort.createLogin(login))
                     .build());
         } catch (CreateLoginException e) {
-            return ResponseEntity.internalServerError().body(Data.builder()
-                    .content("Não foi possível salvar o usuário!")
+            return ResponseEntity.status(406).body(Data.builder()
+                    .content("Usuário cadastrado!")
                     .build());
         }
     }

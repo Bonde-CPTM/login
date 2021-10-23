@@ -21,7 +21,7 @@ public class LoginService implements LoginPort {
 
     @Override
     public Login createLogin(Login login) throws CreateLoginException {
-        if(loginRepository.existsByEmailAndSenha(login.getEmail(), login.getPassword())){
+        if(loginRepository.existsByEmail(login.getEmail())){
             throw new CreateLoginException();
         }
         return LoginMapper.entitytoModel(loginRepository.save(LoginMapper.modelToEntity(login)));
