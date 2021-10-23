@@ -22,7 +22,7 @@ public class LoginController {
     public ResponseEntity<?> createLogin(@RequestBody Login login){
 
         if(checkLogin(login)){
-            return ResponseEntity.status(402).body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
         }
@@ -43,7 +43,7 @@ public class LoginController {
     @GetMapping()
     public ResponseEntity<?> getLogin (@RequestBody Login login){
         if(checkLogin(login)){
-            return ResponseEntity.status(402).body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
         }
@@ -61,7 +61,7 @@ public class LoginController {
     @PatchMapping()
     public ResponseEntity<?> updateLogin(@RequestBody Login login){
         if(checkLogin(login)){
-            return ResponseEntity.status(402).body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
         }
@@ -71,7 +71,7 @@ public class LoginController {
                     .content(loginPort.updateLogin(login))
                     .build());
         } catch (UpdateLoginExeption e) {
-            return ResponseEntity.internalServerError().body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Não foi possível atualizar o usuário!")
                     .build());
         }
@@ -81,7 +81,7 @@ public class LoginController {
     @PostMapping("/signin")
     public ResponseEntity<?> createSession(@RequestBody Login login){
         if(checkLogin(login)){
-            return ResponseEntity.status(402).body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
         }
@@ -91,7 +91,7 @@ public class LoginController {
                     .content(loginPort.createSession(login))
                     .build());
         } catch (CreateSessionException e) {
-            return ResponseEntity.internalServerError().body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Não foi possível criar sessão para o usuário!")
                     .build());
         }
@@ -101,7 +101,7 @@ public class LoginController {
     @DeleteMapping()
     public ResponseEntity<?> deleteLogin(@RequestBody Login login){
         if(checkLogin(login)){
-            return ResponseEntity.status(402).body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
         }
@@ -115,7 +115,7 @@ public class LoginController {
                     .content("Não foi possível deletar o usuário!")
                     .build());
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(Data.builder()
+            return ResponseEntity.status(406).body(Data.builder()
                     .content("Não foi possível deletar o usuário!")
                     .build());
         }
