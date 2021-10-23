@@ -130,6 +130,10 @@ public class LoginController {
     }
 
     public boolean checkLogin(Login login){
-        return login.getEmail().isEmpty() || login.getPassword().isEmpty();
+        try {
+            return login.getEmail().isEmpty() || login.getPassword().isEmpty();
+        } catch (NullPointerException e){
+            return false;
+        }
     }
 }
