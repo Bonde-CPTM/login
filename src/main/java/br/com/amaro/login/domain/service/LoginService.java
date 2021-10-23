@@ -1,6 +1,7 @@
 package br.com.amaro.login.domain.service;
 
 import br.com.amaro.login.domain.adapter.LoginRepository;
+import br.com.amaro.login.domain.exception.CreateLoginException;
 import br.com.amaro.login.domain.exception.CreateSessionException;
 import br.com.amaro.login.domain.exception.UpdateLoginExeption;
 import br.com.amaro.login.domain.port.LoginPort;
@@ -19,7 +20,10 @@ public class LoginService implements LoginPort {
     private LoginRepository loginRepository;
 
     @Override
-    public Login createLogin(Login login) {
+    public Login createLogin(Login login) throws CreateLoginException {
+        if(loginRepository.existsByEmailAndSenha(login.getEmail(), login.getPassword())){
+            throw new CreateLoginException();
+        }
         return LoginMapper.entitytoModel(loginRepository.save(LoginMapper.modelToEntity(login)));
     }
 

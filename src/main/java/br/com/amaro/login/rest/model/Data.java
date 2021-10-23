@@ -8,5 +8,5 @@ import lombok.Setter;
 @Builder
 public class Data {
 
-    Object conteudo;
+    Object content;
 }

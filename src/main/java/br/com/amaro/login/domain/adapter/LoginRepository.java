@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface LoginRepository extends JpaRepository<LoginEntity, String> {
     LoginEntity findByEmailAndSenha(String email, String senha);
     LoginEntity findByIdLogin(UUID idLogin);
+    boolean existsByEmailAndSenha(String email, String senha);
     boolean existsByIdLogin(UUID idLogin);
 }

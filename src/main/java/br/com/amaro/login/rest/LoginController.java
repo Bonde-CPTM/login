@@ -1,5 +1,6 @@
 package br.com.amaro.login.rest;
 
+import br.com.amaro.login.domain.exception.CreateLoginException;
 import br.com.amaro.login.domain.exception.CreateSessionException;
 import br.com.amaro.login.domain.exception.UpdateLoginExeption;
 import br.com.amaro.login.domain.port.LoginPort;
@@ -22,18 +23,18 @@ public class LoginController {
 
         if(checkLogin(login)){
             return ResponseEntity.status(402).body(Data.builder()
-                    .conteudo("Email ou senha inválido")
+                    .content("Email ou senha inválido")
                     .build());
         }
 
         try {
 
             return ResponseEntity.status(201).body(Data.builder()
-                    .conteudo(loginPort.createLogin(login))
+                    .content(loginPort.createLogin(login))
                     .build());
-        } catch (Exception e) {
+        } catch (CreateLoginException e) {
             return ResponseEntity.internalServerError().body(Data.builder()
-                    .conteudo("Não foi possível salvar o usuário!")
+                    .content("Não foi possível salvar o usuário!")
                     .build());
         }
     }
@@ -43,13 +44,13 @@ public class LoginController {
     public ResponseEntity<?> getLogin (@RequestBody Login login){
         if(checkLogin(login)){
             return ResponseEntity.status(402).body(Data.builder()
-                    .conteudo("Email ou senha inválido")
+                    .content("Email ou senha inválido")
                     .build());
         }
         try {
 
             return ResponseEntity.ok().body(Data.builder()
-                    .conteudo(loginPort.getLogin(login))
+                    .content(loginPort.getLogin(login))
                     .build());
         } catch (Exception e){
             return ResponseEntity.internalServerError().body("Não foi possível consultar login");
@@ -61,37 +62,37 @@ public class LoginController {
     public ResponseEntity<?> updateLogin(@RequestBody Login login){
         if(checkLogin(login)){
             return ResponseEntity.status(402).body(Data.builder()
-                    .conteudo("Email ou senha inválido")
+                    .content("Email ou senha inválido")
                     .build());
         }
         try {
 
             return ResponseEntity.ok().body(Data.builder()
-                    .conteudo(loginPort.updateLogin(login))
+                    .content(loginPort.updateLogin(login))
                     .build());
         } catch (UpdateLoginExeption e) {
             return ResponseEntity.internalServerError().body(Data.builder()
-                    .conteudo("Não foi possível atualizar o usuário!")
+                    .content("Não foi possível atualizar o usuário!")
                     .build());
         }
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/sessao")
+    @PostMapping("/signin")
     public ResponseEntity<?> createSession(@RequestBody Login login){
         if(checkLogin(login)){
             return ResponseEntity.status(402).body(Data.builder()
-                    .conteudo("Email ou senha inválido")
+                    .content("Email ou senha inválido")
                     .build());
         }
         try {
 
             return ResponseEntity.status(201).body(Data.builder()
-                    .conteudo(loginPort.createSession(login))
+                    .content(loginPort.createSession(login))
                     .build());
         } catch (CreateSessionException e) {
             return ResponseEntity.internalServerError().body(Data.builder()
-                    .conteudo("Não foi possível criar sessão para o usuário!")
+                    .content("Não foi possível criar sessão para o usuário!")
                     .build());
         }
     }
@@ -101,21 +102,21 @@ public class LoginController {
     public ResponseEntity<?> deleteLogin(@RequestBody Login login){
         if(checkLogin(login)){
             return ResponseEntity.status(402).body(Data.builder()
-                    .conteudo("Email ou senha inválido")
+                    .content("Email ou senha inválido")
                     .build());
         }
         try {
 
             return loginPort.deleteLogin(login)?
                     ResponseEntity.status(200).body(Data.builder()
-                    .conteudo("Usuário deletado com sucesso")
+                    .content("Usuário deletado com sucesso")
                     .build()):
                     ResponseEntity.internalServerError().body(Data.builder()
-                    .conteudo("Não foi possível deletar o usuário!")
+                    .content("Não foi possível deletar o usuário!")
                     .build());
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Data.builder()
-                    .conteudo("Não foi possível deletar o usuário!")
+                    .content("Não foi possível deletar o usuário!")
                     .build());
         }
     }
