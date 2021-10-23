@@ -7,7 +7,7 @@ public class LoginMapper {
         return Login.builder()
                 .idLogin(entity.getIdLogin())
                 .email(entity.getEmail())
-                .senha(entity.getSenha())
+                .password(entity.getSenha())
                 .token(entity.getToken())
                 .build();
     }
@@ -15,7 +15,7 @@ public class LoginMapper {
         return LoginEntity.builder()
                 .idLogin(model.getIdLogin())
                 .email(model.getEmail())
-                .senha(model.getSenha())
+                .senha(model.getPassword())
                 .token(model.getToken())
                 .build();
     }

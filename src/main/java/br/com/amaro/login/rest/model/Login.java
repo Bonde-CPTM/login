@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Login {
     private UUID idLogin;
     private String email;
-    private String senha;
+    private String password;
     private String token;
 
 }

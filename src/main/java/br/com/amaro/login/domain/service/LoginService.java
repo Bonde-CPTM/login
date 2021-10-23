@@ -25,7 +25,7 @@ public class LoginService implements LoginPort {
 
     @Override
     public Login getLogin(Login login) {
-        return LoginMapper.entitytoModel(loginRepository.findByEmailAndSenha(login.getEmail(), login.getSenha()));
+        return LoginMapper.entitytoModel(loginRepository.findByEmailAndSenha(login.getEmail(), login.getPassword()));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class LoginService implements LoginPort {
 
     @Override
     public Login createSession(Login login) throws CreateSessionException {
-        LoginEntity entity = loginRepository.findByEmailAndSenha(login.getEmail(), login.getSenha());
+        LoginEntity entity = loginRepository.findByEmailAndSenha(login.getEmail(), login.getPassword());
         if(entity != null){
             entity.setToken(UUID.randomUUID().toString());
             return LoginMapper.entitytoModel(loginRepository.save(entity));
