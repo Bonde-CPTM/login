@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -40,9 +43,9 @@ public class LoginController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping()
-    public ResponseEntity<?> getLogin (@RequestBody Login login){
-        if(checkLogin(login)){
+    @GetMapping("/{idLogin}")
+    public ResponseEntity<?> getLogin (@PathParam(value = "idLogin") UUID idLogin){
+        if(idLogin.toString().isEmpty()){
             return ResponseEntity.status(406).body(Data.builder()
                     .content("Email ou senha inválido")
                     .build());
@@ -50,7 +53,7 @@ public class LoginController {
         try {
 
             return ResponseEntity.ok().body(Data.builder()
-                    .content(loginPort.getLogin(login))
+                    .content(loginPort.getLogin(idLogin))
                     .build());
         } catch (Exception e){
             return ResponseEntity.internalServerError().body("Não foi possível consultar login");
@@ -122,10 +125,11 @@ public class LoginController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/sessao")
-    public ResponseEntity<?> getSession(@RequestBody Login login){
-        return loginPort.getSession(login)?
-                ResponseEntity.ok().body(login):
+    @GetMapping("{idLogin}/sessao/{token}")
+    public ResponseEntity<?> getSession(@PathParam(value = "idLogin") UUID idLogin,
+                                        @PathParam(value = "token") String token){
+        return loginPort.getSession(idLogin,token)?
+                ResponseEntity.ok().body("Sessão válida!"):
                 ResponseEntity.status(402).body("Sessão inválida!");
     }
 

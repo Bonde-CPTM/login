@@ -29,8 +29,8 @@ public class LoginService implements LoginPort {
     }
 
     @Override
-    public Login getLogin(Login login) {
-        return LoginMapper.entitytoModel(loginRepository.findByEmailAndSenha(login.getEmail(), login.getPassword()));
+    public Login getLogin(UUID idLogin) {
+        return LoginMapper.entitytoModel(loginRepository.findByIdLogin(idLogin));
     }
 
     @Override
@@ -64,8 +64,8 @@ public class LoginService implements LoginPort {
     }
 
     @Override
-    public boolean getSession(Login login) {
-        return loginRepository.existsByIdLoginAndToken(login.getIdLogin(),login.getToken());
+    public boolean getSession(UUID idLogin, String token) {
+        return loginRepository.existsByIdLoginAndToken(idLogin,token);
     }
 
 }

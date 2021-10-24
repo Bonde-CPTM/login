@@ -6,11 +6,12 @@ import br.com.amaro.login.domain.exception.UpdateLoginExeption;
 import br.com.amaro.login.rest.model.Login;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface LoginPort {
     Login createLogin(Login login) throws CreateLoginException;
 
-    Login getLogin(Login login);
+    Login getLogin(UUID idLogin);
 
     Login updateLogin(Login login) throws UpdateLoginExeption;
 
@@ -18,5 +19,5 @@ public interface LoginPort {
 
     Login createSession(Login login) throws CreateSessionException;
 
-    boolean getSession(Login login);
+    boolean getSession(UUID idLogin, String token);
 }
